@@ -1,0 +1,15 @@
+SELECT empno
+FROM salaries
+ORDER BY salary DESC
+LIMIT 1;
+
+
+Explanation of the query:
+
+1)SELECT empno: This part of the query selects the empno column.
+
+2)FROM salaries: Specifies the table salaries from which the data will be retrieved.
+
+3)ORDER BY salary DESC: Orders the rows in descending order based on the salary column. This means that the employees with the highest salary will appear first.
+
+4)LIMIT 1: This limits the result to only one row, which is the row with the highest salary.
