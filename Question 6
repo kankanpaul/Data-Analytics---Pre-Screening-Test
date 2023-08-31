@@ -1,0 +1,31 @@
+SELECT
+    product_id,
+    warehouse_id,
+    SUM(quantity) AS total_quantity
+FROM
+    inventory
+WHERE
+    (product_id, warehouse_id, date) IN (
+        SELECT
+            product_id,
+            warehouse_id,
+            MAX(date) AS latest_date
+        FROM
+            inventory
+        GROUP BY
+            product_id, warehouse_id
+    )
+GROUP BY
+    product_id, warehouse_id;
+
+
+
+
+1)In the subquery (product_id, warehouse_id, date) IN (SELECT product_id,warehouse_id,MAX(date) AS latest_date FROM inventory GROUP BY product_id, warehouse_id), 
+we're finding the latest date for each combination of product_id and warehouse_id using the MAX(date) function and grouping by those columns.
+
+2)The subquery's result is then used to filter the main query's result. We retrieve the product_id, warehouse_id, 
+and total_quantity by summing the quantity for each product and warehouse on the latest date available.
+
+3)The GROUP BY clause groups the result by product_id and warehouse_id, 
+ensuring that we calculate the total quantity for each product in each warehouse.
